@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Order Management Simulator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+        h1, h2 {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+        .list-group-item {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .btn-custom {
+            font-size: 18px;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body class="container">
+
+    <div class="text-center mb-4">
+        <h1 class="text-success"><i class="fas fa-utensils"></i> Restaurant Order Management Simulator</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h2 class="text-primary"><i class="fas fa-clipboard-list"></i> Order Queue</h2>
+            <ul class="list-group">
+                {% for order in order_queue %}
+                    <li class="list-group-item">{{ order }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <h2 class="text-secondary"><i class="fas fa-history"></i> Completed Orders (History)</h2>
+            <ul class="list-group">
+                {% for order in completed_orders %}
+                    <li class="list-group-item">{{ order }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <form action="/enqueue" method="post" class="mt-3">
+        <div class="form-group">
+            <label for="orderInput" class="sr-only">Enter your order</label>
+            <input type="text" class="form-control" id="orderInput" name="order" placeholder="Enter your order">
+        </div>
+        <button type="submit" class="btn btn-success btn-custom btn-block"><i class="fas fa-plus"></i> Enqueue Order</button>
+    </form>
+
+    <form action="/dequeue" method="post" class="mt-3">
+        <button type="submit" class="btn btn-primary btn-custom btn-block"><i class="fas fa-check"></i> Process Order</button>
+    </form>
+
+    <form action="/review_history" method="post" class="mt-3">
+        <button type="submit" class="btn btn-secondary btn-custom btn-block"><i class="fas fa-history"></i> Review History</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
